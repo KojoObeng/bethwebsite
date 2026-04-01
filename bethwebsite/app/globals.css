@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Jamaica palette — deep forest, rich gold, warm cream */
+  --color-j-black:        #0D1C0F;
+  --color-j-forest:       #163320;
+  --color-j-green:        #234D38;
+  --color-j-green-mid:    #3A6652;
+  --color-j-green-light:  #4E8068;
+  --color-j-gold:         #C8A200;
+  --color-j-gold-mid:     #D4AA3B;
+  --color-j-gold-light:   #E8CC7A;
+  --color-j-gold-pale:    #F5E8B0;
+  --color-j-parchment:    #F5EFE0;
+  --color-j-cream:        #FBF7EE;
+  --color-j-border:       #C8B896;
+  --color-j-muted:        #6B5030;
+  --color-j-text:         #0F2415;
+
+  --font-sans:  var(--font-garamond), Georgia, serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+}
+
+:root {
+  --background: #F5EFE0;
+  --foreground: #0F2415;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a, button, [role="button"] {
+  cursor: pointer;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-garamond), Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+/* PDF / photo card lift on hover */
+.pdf-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pdf-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(10, 20, 9, 0.18);
+}
+
+/* Diagonal-stripe Jamaica hero texture */
+.jamaica-texture {
+  background-image:
+    repeating-linear-gradient(
+      -55deg,
+      transparent,
+      transparent 28px,
+      rgba(200, 162, 0, 0.04) 28px,
+      rgba(200, 162, 0, 0.04) 30px
+    );
+}
+
+/* Gold shimmer bar */
+.gold-rule {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C8A200, #E8CC7A, #C8A200, transparent);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1A3829; }
+::-webkit-scrollbar-thumb { background: #C8A200; border-radius: 3px; }
