@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import VideoGrid, { CloudinaryVideo } from './VideoGrid';
 import type { FolderMeta } from '../photographs/page';
@@ -40,15 +40,23 @@ interface LightboxProps {
   onNext: () => void;
   hasPrev: boolean;
   hasNext: boolean;
+  prevImage?: CloudinaryImage;
+  nextImage?: CloudinaryImage;
 }
 
-function Lightbox({ image, onClose, onPrev, onNext, hasPrev, hasNext }: LightboxProps) {
+function Lightbox({ image, onClose, onPrev, onNext, hasPrev, hasNext, prevImage, nextImage }: LightboxProps) {
+  // Preload adjacent images so next/prev clicks are instant
+  useEffect(() => {
+    if (prevImage) { const img = new window.Image(); img.src = fullUrl(prevImage.secure_url); }
+    if (nextImage) { const img = new window.Image(); img.src = fullUrl(nextImage.secure_url); }
+  }, [prevImage, nextImage]);
+
   return (
     <div
       className="fixed inset-0 z-50 bg-black/90 flex flex-col"
-      onClick={(e) => e.target === e.currentTarget && onClose()}
+      onClick={onClose}
     >
-      <div className="flex items-center justify-between px-6 py-3 flex-shrink-0 bg-black/40">
+      <div className="flex items-center justify-between px-6 py-3 flex-shrink-0 bg-black/40" onClick={(e) => e.stopPropagation()}>
         <span
           className="text-[#C4A55A] text-xs tracking-[0.2em] uppercase truncate max-w-[60%]"
           style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
@@ -61,7 +69,7 @@ function Lightbox({ image, onClose, onPrev, onNext, hasPrev, hasNext }: Lightbox
       </div>
       <div className="flex-1 flex items-center justify-center relative px-12 py-4">
         {hasPrev && (
-          <button onClick={onPrev} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-[#C4A55A] hover:text-white text-4xl transition-colors z-10 px-2" aria-label="Previous">‹</button>
+          <button onClick={(e) => { e.stopPropagation(); onPrev(); }} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-[#C4A55A] hover:text-white text-4xl transition-colors z-10 px-2" aria-label="Previous">‹</button>
         )}
         <Image
           src={fullUrl(image.secure_url)}
@@ -70,10 +78,11 @@ function Lightbox({ image, onClose, onPrev, onNext, hasPrev, hasNext }: Lightbox
           height={image.height}
           className="object-contain max-h-[calc(100vh-120px)] w-auto"
           style={{ maxHeight: 'calc(100vh - 120px)' }}
+          onClick={(e) => e.stopPropagation()}
           priority
         />
         {hasNext && (
-          <button onClick={onNext} className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-[#C4A55A] hover:text-white text-4xl transition-colors z-10 px-2" aria-label="Next">›</button>
+          <button onClick={(e) => { e.stopPropagation(); onNext(); }} className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-[#C4A55A] hover:text-white text-4xl transition-colors z-10 px-2" aria-label="Next">›</button>
         )}
       </div>
     </div>
@@ -100,7 +109,7 @@ function ImageGrid({ images }: { images: CloudinaryImage[] }) {
               src={thumbUrl(img.secure_url)}
               alt={img.public_id.split('/').pop() ?? 'photograph'}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
               sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
               loading="lazy"
               placeholder="blur"
@@ -118,6 +127,8 @@ function ImageGrid({ images }: { images: CloudinaryImage[] }) {
           onNext={() => setLightboxIndex((i) => (i !== null && i < images.length - 1 ? i + 1 : i))}
           hasPrev={lightboxIndex > 0}
           hasNext={lightboxIndex < images.length - 1}
+          prevImage={lightboxIndex > 0 ? images[lightboxIndex - 1] : undefined}
+          nextImage={lightboxIndex < images.length - 1 ? images[lightboxIndex + 1] : undefined}
         />
       )}
     </>
@@ -164,21 +175,21 @@ function FolderSection({ folder }: { folder: FolderMeta }) {
         <div className="flex-shrink-0 w-16 h-16 rounded-sm overflow-hidden bg-[#E8DCC5] border border-[#C8B896]">
           {folder.previewUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={folder.previewUrl} alt={folder.name} className="w-full h-full object-cover" />
+            <img src={folder.previewUrl} alt={folder.name} className="w-full h-full object-contain object-center" />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-[#C4A55A] text-xl">▶</div>
           )}
         </div>
 
         <h3
-          className="text-lg text-[#234D38] font-normal flex-1"
+          className="text-2xl text-[#234D38] font-normal flex-1"
           style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
         >
           {folder.name}
         </h3>
         {loadedTotal !== null && (
           <span
-            className="text-[#9B7320] text-sm italic"
+            className="text-[#9B7320] text-xl italic"
             style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
           >
             {loadedTotal} item{loadedTotal !== 1 ? 's' : ''}

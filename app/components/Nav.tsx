@@ -30,7 +30,7 @@ export default function Nav() {
               <li key={tab.href} className="flex-shrink-0">
                 <Link
                   href={tab.href}
-                  className={`block px-4 sm:px-5 py-3.5 text-[0.7rem] tracking-[0.14em] uppercase whitespace-nowrap border-b-2 transition-all duration-200 ${
+                  className={`block px-4 sm:px-5 py-3.5 text-sm tracking-[0.14em] uppercase whitespace-nowrap border-b-2 transition-all duration-200 ${
                     isActive
                       ? 'border-[#C8A200] text-[#E8CC7A] font-semibold'
                       : 'border-transparent text-[#E8DCC5]/75 hover:text-[#E8CC7A] hover:border-[#C8A200]/50'

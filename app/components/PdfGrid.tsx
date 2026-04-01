@@ -68,7 +68,7 @@ export default function PdfGrid({ items, emptyMessage = 'No items available yet.
                 )}
               </div>
               <div className="flex flex-col gap-0.5 px-1">
-                <p className="text-[#234D38] text-sm font-semibold leading-tight group-hover:text-[#9B7320] transition-colors" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
+                <p className="text-[#234D38] text-lg font-semibold leading-tight group-hover:text-[#9B7320] transition-colors" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                   {item.title}
                 </p>
                 {item.subtitle && <p className="text-[#7A6545] text-xs italic leading-snug" style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}>{item.subtitle}</p>}
@@ -86,7 +86,7 @@ export default function PdfGrid({ items, emptyMessage = 'No items available yet.
                 <PdfThumbnail url={item.url} />
               </div>
               <div className="flex flex-col gap-0.5 px-1">
-                <p className="text-[#234D38] text-sm font-semibold leading-tight group-hover:text-[#9B7320] transition-colors" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
+                <p className="text-[#234D38] text-lg font-semibold leading-tight group-hover:text-[#9B7320] transition-colors" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
                   {item.title}
                 </p>
                 {item.subtitle && (
