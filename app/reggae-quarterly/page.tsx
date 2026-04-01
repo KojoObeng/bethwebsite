@@ -10,13 +10,22 @@ function titleFromPathname(pathname: string): string {
 const getReggaeQuarterlyItems = unstable_cache(
   async (): Promise<PdfItem[]> => {
     const { blobs } = await list({ prefix: 'Reggae-Quarterly/' });
+    const thumbMap = new Map(
+      blobs
+        .filter((b) => /\.(jpg|jpeg|png|webp)$/i.test(b.pathname))
+        .map((b) => [b.pathname.replace(/\.[^.]+$/, '').toLowerCase(), b.url])
+    );
     return blobs
       .filter((b) => b.pathname.toLowerCase().endsWith('.pdf'))
-      .map((b) => ({
-        id: b.pathname,
-        title: titleFromPathname(b.pathname),
-        url: b.url,
-      }));
+      .map((b) => {
+        const stem = b.pathname.replace(/\.pdf$/i, '').toLowerCase();
+        return {
+          id: b.pathname,
+          title: titleFromPathname(b.pathname),
+          url: b.url,
+          thumbnailUrl: thumbMap.get(stem),
+        };
+      });
   },
   ['reggae-quarterly-blobs'],
   { revalidate: 3600 }

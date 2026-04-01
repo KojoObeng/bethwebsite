@@ -94,7 +94,7 @@ export default function HomePage() {
 
           {/* Body text */}
           <div
-            className="text-white text-lg sm:text-xl leading-loose space-y-5"
+            className="text-white text-lg sm:text-xl leading-loose space-y-5 bg-black/40 rounded-sm px-6 py-5 backdrop-blur-sm"
             style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
           >
             <p>

@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-const ENGLISH_PDF = 'https://hpq9zvkcnep4qcuf.public.blob.vercel-storage.com/WitnessToReggae/Witness-to-reggae-Beth-Lesser.pdf';
-const UKRAINIAN_PDF = 'https://hpq9zvkcnep4qcuf.public.blob.vercel-storage.com/WitnessToReggae/Witness-to-reggae-Beth-Lesser_Ukranian.pdf';
+const ENGLISH_PDF = '/Witness to Reggae.pdf';
+const UKRAINIAN_PDF = '/Witness to Reggae (Ukrainian).pdf';
 
 export default function WitnessToReggaePage() {
   const [lang, setLang] = useState<'en' | 'uk'>('en');

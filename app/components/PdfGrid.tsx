@@ -11,6 +11,7 @@ export interface PdfItem {
   url: string;
   externalUrl?: boolean;
   coverImage?: string;
+  thumbnailUrl?: string;
   year?: string;
   description?: string;
 }
@@ -83,7 +84,12 @@ export default function PdfGrid({ items, emptyMessage = 'No items available yet.
           <div key={item.id} className="pdf-card text-left group bg-[#FBF7EE] border border-[#C8B896] rounded-sm p-3 flex flex-col gap-3" style={{ boxShadow: '0 2px 8px rgba(44,28,14,0.06)' }}>
             <button onClick={() => setActive(item)} className="flex flex-col gap-3 text-left">
               <div className="w-full aspect-[3/4] overflow-hidden rounded-sm border border-[#E8DCC5] bg-[#E8DCC5]">
-                <PdfThumbnail url={item.url} />
+                {item.thumbnailUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={item.thumbnailUrl} alt={item.title} className="w-full h-full object-cover object-top" />
+                ) : (
+                  <PdfThumbnail url={item.url} />
+                )}
               </div>
               <div className="flex flex-col gap-0.5 px-1">
                 <p className="text-[#234D38] text-lg font-semibold leading-tight group-hover:text-[#9B7320] transition-colors" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>

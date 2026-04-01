@@ -27,15 +27,21 @@ function titleFromPathname(pathname: string): string {
 const getBooksItems = unstable_cache(
   async (): Promise<PdfItem[]> => {
     const { blobs } = await list({ prefix: 'Books/' });
-    console.log(blobs)
+    const thumbMap = new Map(
+      blobs
+        .filter((b) => /\.(jpg|jpeg|png|webp)$/i.test(b.pathname))
+        .map((b) => [b.pathname.replace(/\.[^.]+$/, '').toLowerCase(), b.url])
+    );
     return blobs
       .filter((b) => b.pathname.toLowerCase().endsWith('.pdf'))
       .map((b) => {
         const title = titleFromPathname(b.pathname);
+        const stem = b.pathname.replace(/\.pdf$/i, '').toLowerCase();
         return {
           id: b.pathname,
           title,
           url: b.url,
+          thumbnailUrl: thumbMap.get(stem),
           description: descriptionForTitle(title),
         };
       });
