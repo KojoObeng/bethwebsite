@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import VideoGrid, { CloudinaryVideo } from './VideoGrid';
 import type { FolderMeta } from '../photographs/page';
@@ -139,6 +139,17 @@ function ImageGrid({ images }: { images: CloudinaryImage[] }) {
 
 function FolderSection({ folder }: { folder: FolderMeta }) {
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLButtonElement>(null);
+
+  function collapse() {
+    setOpen(false);
+    setTimeout(() => {
+      if (headerRef.current) {
+        const top = headerRef.current.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }, 0);
+  }
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<{ images: CloudinaryImage[]; videos: CloudinaryVideo[] } | null>(
     folderCache.get(folder.name) ?? null
@@ -168,6 +179,7 @@ function FolderSection({ folder }: { folder: FolderMeta }) {
     <section className="border border-[#E8DCC5] rounded-sm">
       {/* Header */}
       <button
+        ref={headerRef}
         onClick={handleOpen}
         className="w-full flex items-center gap-4 px-4 py-3 bg-[#F0E8D5] hover:bg-[#EAE0C8] transition-colors text-left"
       >
@@ -205,7 +217,7 @@ function FolderSection({ folder }: { folder: FolderMeta }) {
         <div className="flex gap-0">
           {/* Full-height collapse tab on the left */}
           <div
-            onClick={() => setOpen(false)}
+            onClick={collapse}
             role="button"
             aria-label={`Collapse ${folder.name}`}
             title={`Collapse ${folder.name}`}
