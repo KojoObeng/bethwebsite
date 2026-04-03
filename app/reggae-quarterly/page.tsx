@@ -28,7 +28,7 @@ const getReggaeQuarterlyItems = unstable_cache(
       });
   },
   ['reggae-quarterly-blobs'],
-  { revalidate: 3600 }
+  { revalidate: false }
 );
 
 export default async function ReggaeQuarterlyPage() {

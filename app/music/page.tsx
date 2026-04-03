@@ -1,14 +1,23 @@
 import Image from 'next/image';
+import { list } from '@vercel/blob';
+import { unstable_cache } from 'next/cache';
 
-const cklnLinks = [
-  {
-    title: '1982 CKLN December 26 Sister Nancy and Reuben Ranks 60 min.',
-    url: '#',
+const getMusicTracks = unstable_cache(
+  async (prefix: string): Promise<{ name: string; url: string }[]> => {
+    const { blobs } = await list({ prefix });
+    return blobs
+      .filter((b) => /\.mp3$/i.test(b.pathname))
+      .sort((a, b) => a.pathname.localeCompare(b.pathname))
+      .map((b) => ({
+        name: b.pathname.split('/').pop()?.replace(/\.mp3$/i, '') ?? b.pathname,
+        url: b.url,
+      }));
   },
-  {
-    title: '1983 CKLN Bobby Zarro, Supercat, Screecha Nice',
-    url: '#',
-  },
+  ['music-tracks'],
+  { revalidate: false }
+);
+
+const mixcloudLinks = [
   {
     title: '1983–1987 CKLN 88.1 FM REGGAE SHOWCASE (David Kingston best of PT 1)',
     url: 'https://www.mixcloud.com/DaveBrown62/ckln-881-fm-_-reggae-showcase-david-kingston-best-of-pt-1-1983__1987/',
@@ -19,7 +28,59 @@ const cklnLinks = [
   },
 ];
 
-export default function MusicPage() {
+interface ShowPlayerProps {
+  title: string;
+  tracks: { name: string; url: string }[];
+}
+
+function ShowPlayer({ title, tracks }: ShowPlayerProps) {
+  return (
+    <div className="mb-6">
+      <div className="flex items-center gap-3 mb-3">
+        <span className="text-[#C4A55A] flex-shrink-0 text-sm">◆</span>
+        <p
+          className="text-base text-[#234D38]"
+          style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
+        >
+          {title}
+        </p>
+      </div>
+      <div className="ml-6 flex flex-col gap-2">
+        {tracks.length === 0 && (
+          <p className="text-[#9B7320] text-sm italic" style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}>
+            Tracks coming soon.
+          </p>
+        )}
+        {tracks.map((track) => (
+          <div key={track.url} className="flex items-center gap-3">
+            <span
+              className="text-[#7A6545] text-xs w-36 flex-shrink-0 truncate"
+              style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
+            >
+              {track.name}
+            </span>
+            {/* preload="none" — audio is not fetched until the user hits play */}
+            <audio
+              controls
+              preload="none"
+              className="h-8 w-48 sm:w-64"
+              style={{ accentColor: '#234D38' }}
+            >
+              <source src={track.url} type="audio/mpeg" />
+            </audio>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default async function MusicPage() {
+  const [sisterNancyTracks, supercatTracks] = await Promise.all([
+    getMusicTracks('Music/1982 CKLN Reggae Showcase Sister Nancy and Reuben Banks/').catch(() => []),
+    getMusicTracks('Music/1983 CKLN Bobby Zarro, Supercat and Screecha Nice/').catch(() => []),
+  ]);
+
   return (
     <div className="max-w-3xl">
 
@@ -69,32 +130,31 @@ export default function MusicPage() {
       {/* CKLN section */}
       <div className="mb-10">
         <h3
-          className="text-2xl text-[#234D38] font-normal mb-4"
+          className="text-2xl text-[#234D38] font-normal mb-6"
           style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
         >
           CKLN Reggae Showcase 1982–1992
         </h3>
-        <p
-          className="text-[#5A4030] text-base leading-relaxed mb-6"
-          style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
-        >
-          Radio show hosted by David Kingston, aka Lord Selector. Download or listen
-          on-line by clicking on the links below
-        </p>
+
+        <ShowPlayer
+          title="1982 CKLN Reggae Showcase Sister Nancy and Reuben Banks"
+          tracks={sisterNancyTracks}
+        />
+
+        <ShowPlayer
+          title="1983 CKLN Bobby Zarro, Supercat and Screecha Nice"
+          tracks={supercatTracks}
+        />
 
         <ul className="flex flex-col gap-3 mb-6">
-          {cklnLinks.map((link) => (
+          {mixcloudLinks.map((link) => (
             <li key={link.title} className="flex items-start gap-3">
               <span className="text-[#C4A55A] mt-0.5 flex-shrink-0 text-sm">◆</span>
               <a
                 href={link.url}
-                target={link.url !== '#' ? '_blank' : undefined}
-                rel={link.url !== '#' ? 'noopener noreferrer' : undefined}
-                className={`text-base transition-colors ${
-                  link.url === '#'
-                    ? 'text-[#A89070] cursor-default'
-                    : 'text-[#234D38] hover:text-[#9B7320] underline'
-                }`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base text-[#234D38] hover:text-[#9B7320] underline transition-colors"
                 style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
               >
                 {link.title}

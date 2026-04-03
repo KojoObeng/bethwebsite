@@ -47,7 +47,7 @@ const getBooksItems = unstable_cache(
       });
   },
   ['books-blobs'],
-  { revalidate: 3600 }
+  { revalidate: false }
 );
 
 const SOUL_JAZZ_BOOK: PdfItem = {

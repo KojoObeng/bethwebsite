@@ -54,7 +54,7 @@ const getFolderMeta = unstable_cache(async (): Promise<FolderMeta[]> => {
   );
 
   return results;
-}, ['cloudinary-folder-meta'], { revalidate: 3600 });
+}, ['cloudinary-folder-meta'], { revalidate: false });
 
 export default async function PhotographsPage() {
   let folders: FolderMeta[] = [];
