@@ -27,7 +27,7 @@ export default function Nav() {
                 ? pathname === '/'
                 : pathname?.startsWith(tab.href);
             return (
-              <li key={tab.href} className="flex-shrink-0">
+              <li key={tab.href} className="flex-shrink-0 border-r border-[#C8A200]/20 last:border-r-0">
                 <Link
                   href={tab.href}
                   className={`block px-4 sm:px-5 py-3.5 text-sm tracking-[0.14em] uppercase whitespace-nowrap border-b-2 transition-all duration-200 ${

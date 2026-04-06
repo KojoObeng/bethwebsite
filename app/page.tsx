@@ -65,7 +65,7 @@ export default function HomePage() {
         {/* Overlay */}
         <div className={`absolute inset-0 ${
           HERO_IMAGE_URL
-            ? 'bg-gradient-to-b from-[#0D1C0F]/95 via-[#0D1C0F]/85 to-[#0D1C0F]/95'
+            ? 'bg-gradient-to-b from-[#0D1C0F]/80 via-[#0D1C0F]/65 to-[#0D1C0F]/80'
             : 'jamaica-texture'
         }`} />
         <div className="gold-rule" />
