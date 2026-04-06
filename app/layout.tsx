@@ -50,7 +50,7 @@ export default function RootLayout({
           {/* Overlay */}
           <div className={`absolute inset-0 pointer-events-none ${
             HEADER_IMAGE_URL
-              ? 'bg-gradient-to-b from-[#0D1C0F]/75 via-[#0D1C0F]/50 to-[#0D1C0F]/75'
+              ? 'bg-gradient-to-b from-[#0D1C0F]/95 via-[#0D1C0F]/80 to-[#0D1C0F]/95 sm:from-[#0D1C0F]/75 sm:via-[#0D1C0F]/50 sm:to-[#0D1C0F]/75'
               : 'jamaica-texture'
           }`} />
 
