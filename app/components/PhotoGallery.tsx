@@ -115,7 +115,6 @@ function ImageGrid({ images }: { images: CloudinaryImage[] }) {
               placeholder="blur"
               blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNCA0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNFOERDQzUiLz48L3N2Zz4="
             />
-            <div className="absolute inset-0 bg-[#234D38]/0 group-hover:bg-[#234D38]/20 transition-colors duration-200" />
           </button>
         ))}
       </div>

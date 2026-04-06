@@ -76,8 +76,8 @@ export default function WitnessToReggaePage() {
         </div>
       </div>
 
-      {/* Inline PDF viewer */}
-      <div className="w-full border border-[#C8B896] rounded-sm overflow-hidden" style={{ height: '80vh' }}>
+      {/* Inline PDF viewer — hidden on mobile, replaced by direct link */}
+      <div className="hidden sm:block w-full border border-[#C8B896] rounded-sm overflow-hidden" style={{ height: '80vh' }}>
         <iframe
           key={pdfUrl}
           src={pdfUrl}
@@ -87,9 +87,20 @@ export default function WitnessToReggaePage() {
         />
       </div>
 
-      {/* Fallback link */}
+      {/* On mobile: just a direct open link */}
+      <a
+        href={pdfUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="sm:hidden inline-block px-6 py-3 bg-[#234D38] text-[#E8CC7A] text-sm tracking-[0.2em] uppercase border border-[#C8A200]/40 hover:bg-[#C8A200] hover:text-[#163320] transition-colors"
+        style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
+      >
+        Open PDF &rarr;
+      </a>
+
+      {/* Desktop fallback link */}
       <p
-        className="mt-4 text-[#7A6545] text-sm"
+        className="hidden sm:block mt-4 text-[#7A6545] text-sm"
         style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
       >
         If the PDF does not load,{' '}

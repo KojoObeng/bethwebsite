@@ -25,6 +25,7 @@ const garamond = EB_Garamond({
 export const metadata: Metadata = {
   title: "Beth Lesser",
   description: "Photographer, writer, and witness to reggae — Jamaica, 1980s",
+  icons: { icon: '/favicon.png' },
 };
 
 export default function RootLayout({

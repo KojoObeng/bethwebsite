@@ -65,7 +65,7 @@ export default function HomePage() {
         {/* Overlay */}
         <div className={`absolute inset-0 ${
           HERO_IMAGE_URL
-            ? 'bg-gradient-to-b from-[#0D1C0F]/90 via-[#0D1C0F]/75 to-[#0D1C0F]/90'
+            ? 'bg-gradient-to-b from-[#0D1C0F]/95 via-[#0D1C0F]/85 to-[#0D1C0F]/95'
             : 'jamaica-texture'
         }`} />
         <div className="gold-rule" />
@@ -75,13 +75,13 @@ export default function HomePage() {
           {/* Title */}
           <h2
             className="text-[#E8CC7A] text-3xl sm:text-[2.6rem] font-normal mb-1 leading-tight"
-            style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
+            style={{ fontFamily: 'var(--font-playfair), Georgia, serif', textShadow: '0 2px 12px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.7)' }}
           >
             Witness To Reggae
           </h2>
           <p
             className="text-[#C8A200] text-sm tracking-[0.25em] uppercase mb-8"
-            style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
+            style={{ fontFamily: 'var(--font-playfair), Georgia, serif', textShadow: '0 2px 8px rgba(0,0,0,0.9)' }}
           >
             The 80&rsquo;s Archive &nbsp;·&nbsp; By Beth Lesser
           </p>

@@ -52,9 +52,9 @@ function ShowPlayer({ title, tracks }: ShowPlayerProps) {
           </p>
         )}
         {tracks.map((track) => (
-          <div key={track.url} className="flex items-center gap-3">
+          <div key={track.url} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
             <span
-              className="text-[#7A6545] text-xs w-36 flex-shrink-0 truncate"
+              className="text-[#7A6545] text-xs sm:w-36 flex-shrink-0 truncate"
               style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
             >
               {track.name}
@@ -63,7 +63,7 @@ function ShowPlayer({ title, tracks }: ShowPlayerProps) {
             <audio
               controls
               preload="none"
-              className="h-8 w-48 sm:w-64"
+              className="w-full sm:w-64"
               style={{ accentColor: '#234D38' }}
             >
               <source src={track.url} type="audio/mpeg" />
