@@ -187,7 +187,7 @@ export default function HomePage() {
                 {s.title}
               </h2>
               <p
-                className="text-[#C8B896]/70 text-sm leading-relaxed mt-1"
+                className="text-[#C8B896]/70 text-base leading-relaxed mt-1"
                 style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
               >
                 {s.description}
