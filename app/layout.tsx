@@ -38,15 +38,18 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-[#F5EFE0] text-[#163320]">
 
         {/* ── Header ─────────────────────────────────────────────── */}
-        <header
-          className="relative overflow-hidden bg-[#163320]"
-          style={HEADER_IMAGE_URL ? {
-            backgroundImage: `url(${HEADER_IMAGE_URL})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 30%',
-            backgroundColor: '#163320',
-          } : { backgroundColor: '#163320' }}
-        >
+        <header className="relative overflow-hidden bg-[#163320]">
+          {/* Background image layer */}
+          {HEADER_IMAGE_URL && (
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                backgroundImage: `url(${HEADER_IMAGE_URL})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center 30%',
+              }}
+            />
+          )}
           {/* Overlay */}
           <div className={`absolute inset-0 pointer-events-none ${
             HEADER_IMAGE_URL
