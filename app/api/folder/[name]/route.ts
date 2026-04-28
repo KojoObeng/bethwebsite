@@ -45,7 +45,7 @@ const getFolderMedia = unstable_cache(
     return { images, videos };
   },
   ['cloudinary-folder'],
-  { revalidate: false }
+  { revalidate: 3600 }
 );
 
 export async function GET(
