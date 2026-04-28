@@ -39,7 +39,7 @@ export default function RootLayout({
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <header
-          className="relative overflow-hidden"
+          className="relative overflow-hidden bg-[#163320]"
           style={HEADER_IMAGE_URL ? {
             backgroundImage: `url(${HEADER_IMAGE_URL})`,
             backgroundSize: 'cover',
@@ -72,7 +72,7 @@ export default function RootLayout({
               style={{
                 fontFamily: "var(--font-playfair), Georgia, serif",
                 color: "#E8CC7A",
-                textShadow: "0 2px 24px rgba(200,162,0,0.25)",
+                textShadow: "0 2px 8px rgba(0,0,0,0.9), 0 4px 20px rgba(0,0,0,0.7), 0 2px 24px rgba(200,162,0,0.25)",
               }}
             >
               Beth Lesser

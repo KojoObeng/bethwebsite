@@ -54,7 +54,7 @@ export default function HomePage() {
 
       {/* ── Hero / Bio ─────────────────────────────────────────────── */}
       <section
-        className="relative -mx-4 sm:-mx-8 -mt-10 mb-16 overflow-hidden"
+        className="relative -mx-4 sm:-mx-8 -mt-10 mb-16 overflow-hidden bg-[#234D38]"
         style={HERO_IMAGE_URL ? {
           backgroundImage: `url(${HERO_IMAGE_URL})`,
           backgroundSize: 'cover',
@@ -119,8 +119,8 @@ export default function HomePage() {
               Century, the event that brought dancehall culture to the larger Jamaican audience.
             </p>
             <p>
-              Over those years, I collected an archive of material that I would like to make available to
-              the public — to present and future reggae scholars and fans.
+              Over those years, I collected an archive of material that I would like to make freely available to
+              the public — at no cost, to present and future reggae scholars and fans.
             </p>
             <p className="text-white/70 italic text-base">
               The material that appears on this website is just the start. I will be attempting to add
@@ -149,6 +149,14 @@ export default function HomePage() {
 
         <div className="gold-rule" />
       </section>
+
+      {/* ── Free access note ──────────────────────────────────────── */}
+      <p
+        className="text-center text-[#C8A200]/80 text-base italic mb-8"
+        style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
+      >
+        Everything in this archive — books, magazines, photographs — is free to access.
+      </p>
 
       {/* ── Section label ─────────────────────────────────────────── */}
       <div className="flex items-center gap-4 mb-10">

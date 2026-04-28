@@ -2,6 +2,11 @@ import { list } from '@vercel/blob';
 import { unstable_cache } from 'next/cache';
 import PdfGrid, { PdfItem } from '../components/PdfGrid';
 
+// Title overrides keyed by a substring of the filename (case-insensitive)
+const TITLE_OVERRIDES: Record<string, string> = {
+  'sugar minott': 'Legend of Youth Promotion - Sugar Minott',
+};
+
 // Descriptions keyed by a substring of the filename (case-insensitive)
 const DESCRIPTIONS: Record<string, string> = {
   'sugar minott': `The Legend of Sugar Minott and Youth Promotion is both a biography of the legendary Jamaican vocalist and a history of the sound system, Youth Promotion. Writing his tribute to the reggae Don Sugar Minott was a labor of love for Beth Lesser. She and her husband, David Kingston, were married at Sugar's home in 1986, at a Youth Promotion dance. When Sugar passed away, Beth realized the importance of keeping his memory alive. Although his music speaks for itself, people might not be aware of all the good he did in his quest to give guidance and support to the youth in the ghetto. Or how much he gave to reggae by discovering and nurturing such artists as Little John, Tristan Palma, Tenorsaw, Junior Reid, Garnett Silk, and many others. Sugar Minott spent his life helping talented youth get ahead in the business. A huge influence on the course of modern reggae, Sugar Minott is a true legend in Jamaican music. This special Muzik Tree edition features many never before published photographs.`,
@@ -21,7 +26,12 @@ function descriptionForTitle(title: string): string | undefined {
 function titleFromPathname(pathname: string): string {
   console.log(pathname);
   const filename = pathname.split('/').pop() ?? pathname;
-  return decodeURIComponent(filename.replace(/\.pdf$/i, '').replace(/_/g, ' '));
+  const derived = decodeURIComponent(filename.replace(/\.pdf$/i, '').replace(/_/g, ' '));
+  const lower = derived.toLowerCase().replace(/[-_]/g, ' ');
+  for (const [key, override] of Object.entries(TITLE_OVERRIDES)) {
+    if (lower.includes(key)) return override;
+  }
+  return derived;
 }
 
 const getBooksItems = unstable_cache(
@@ -54,7 +64,7 @@ const SOUL_JAZZ_BOOK: PdfItem = {
   id: 'soul-jazz-dancehall',
   title: 'Dancehall: The Rise of Jamaican Dancehall Culture',
   subtitle: 'Soul Jazz Records',
-  url: 'https://www.souljazzrecords.co.uk',
+  url: 'https://soundsoftheuniverse.com/sjr/product/dancehall-book-the-rise-of-jamaican-dancehall-culture',
   externalUrl: true,
   coverImage: '/RiseOfDancehallCulture.jpg',
   description: `(Only available through Soul Jazz Records and outlets)\n\n"How the world tuned into Jamaica: The sounds of Kingston's dancehall craze revolutionized music and shaped the hits we listen to today" — Rob Nash, The Sunday Times, UK, November 2, 2008\n\nLesser first visited Kingston in 1981 as a wide-eyed 28-year-old Canadian reggae fan. She found the big new thing, the scene everyone wanted to be involved in, was dancehall. She spent most of the decade travelling to Jamaica and back. The 1980s are seen as the golden age of dancehall, when the serious political messages of Rastafarianism gave way to a boisterous music that drew the whole community into the party. At sound clashes, rival sound systems would unleash their most powerful weapons against each other: the latest dubplates, the most experienced selectors, and perhaps a hot new DJ with a fine line in bawdy patter. Lesser found the people who were making this music more than willing to be photographed. "What made a big impression on my first visit was that everything was so accessible," she recalls. Dancehall book available in book stores, art galleries, on-line and from Soul Jazz Records.`,
@@ -94,7 +104,9 @@ export default async function BooksPage() {
           style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
         >
           A curated library of books on reggae, Jamaican culture, and the music
-          that shaped a generation. Click any title to read.
+          that shaped a generation.{' '}
+          <strong className="text-[#234D38]">Every book is free to read in full</strong>{' '}
+          — no account or purchase required. Just click to open.
         </p>
       </div>
 

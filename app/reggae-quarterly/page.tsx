@@ -73,6 +73,10 @@ export default async function ReggaeQuarterlyPage() {
             With Pablo&rsquo;s encouragement, we expanded the concept and came out with the{' '}
             <em>Reggae Quarterly</em> magazines presented here.
           </p>
+          <p>
+            <strong className="text-[#234D38]">All issues are free to read in full</strong>{' '}
+            — just click any cover to open the complete magazine.
+          </p>
         </div>
       </div>
 

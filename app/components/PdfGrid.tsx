@@ -74,8 +74,8 @@ export default function PdfGrid({ items, emptyMessage = 'No items available yet.
                 </p>
                 {item.subtitle && <p className="text-[#7A6545] text-xs italic leading-snug" style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}>{item.subtitle}</p>}
               </div>
-              <span className="text-[0.65rem] tracking-[0.2em] uppercase text-[#9B7320] group-hover:text-[#234D38] transition-colors mt-auto px-1 pb-1" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                Visit Site &rarr;
+              <span className="inline-block self-start text-[0.65rem] tracking-[0.15em] uppercase border border-[#7A6545] text-[#7A6545] px-3 py-1 rounded-full mt-auto mx-1 mb-1" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
+                Available for Purchase &rarr;
               </span>
             </a>
             {item.description && <CollapsibleDescription text={item.description} />}
@@ -112,8 +112,8 @@ export default function PdfGrid({ items, emptyMessage = 'No items available yet.
                   </p>
                 )}
               </div>
-              <span className="text-[0.65rem] tracking-[0.2em] uppercase text-[#9B7320] group-hover:text-[#234D38] transition-colors px-1 pb-1" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
-                Read &rarr;
+              <span className="inline-block self-start text-[0.65rem] tracking-[0.15em] uppercase bg-[#234D38] text-[#F5EDD6] group-hover:bg-[#9B7320] transition-colors px-3 py-1 rounded-full mx-1 mb-1" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
+                Read Free &rarr;
               </span>
             </button>
             {item.description && <CollapsibleDescription text={item.description} />}
