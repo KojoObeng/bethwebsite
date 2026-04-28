@@ -270,6 +270,8 @@ function FolderSection({ folder }: { folder: FolderMeta }) {
 // ── Main export ───────────────────────────────────────────────────────────────
 
 export default function PhotoGallery({ folders }: { folders: FolderMeta[] }) {
+  const [query, setQuery] = useState('');
+
   if (folders.length === 0) {
     return (
       <div className="text-center py-20">
@@ -280,11 +282,42 @@ export default function PhotoGallery({ folders }: { folders: FolderMeta[] }) {
     );
   }
 
+  const filtered = query.trim()
+    ? folders.filter((f) => f.name.toLowerCase().includes(query.toLowerCase()))
+    : folders;
+
   return (
     <div className="flex flex-col gap-4">
-      {folders.map((folder) => (
-        <FolderSection key={folder.name} folder={folder} />
-      ))}
+      {/* Search bar */}
+      <div className="relative">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search folders…"
+          className="w-full bg-[#F0E8D5] border border-[#C8B896] rounded-sm px-4 py-2.5 pr-10 text-[#234D38] placeholder-[#5A4030] focus:outline-none focus:border-[#9B7320] text-base"
+          style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
+        />
+        {query && (
+          <button
+            onClick={() => setQuery('')}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9B7320] hover:text-[#234D38] text-lg leading-none transition-colors"
+            aria-label="Clear search"
+          >
+            &times;
+          </button>
+        )}
+      </div>
+
+      {filtered.length === 0 ? (
+        <p className="text-center text-[#9B7320] italic py-10" style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}>
+          No folders match &ldquo;{query}&rdquo;
+        </p>
+      ) : (
+        filtered.map((folder) => (
+          <FolderSection key={folder.name} folder={folder} />
+        ))
+      )}
     </div>
   );
 }

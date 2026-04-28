@@ -87,6 +87,14 @@ export default function RootLayout({
               <span className="text-[#C8A200] text-xs">◆</span>
               <div className="h-px w-16 sm:w-28 bg-[#C8A200] opacity-60" />
             </div>
+
+            {/* Free access note */}
+            <p
+              className="text-[#E8CC7A] text-sm tracking-[0.3em] uppercase mt-4"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif", textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}
+            >
+              Free &amp; Open Archive
+            </p>
           </div>
 
           {/* Bottom gold rule */}

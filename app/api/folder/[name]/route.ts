@@ -55,7 +55,13 @@ export async function GET(
   const { name } = await params;
   const folderName = decodeURIComponent(name);
   try {
-    const data = await getFolderMedia(folderName);
+    let data = await getFolderMedia(folderName);
+    // Cloudinary auto-capitalises folder display names but stores resources
+    // under the original lowercase path — retry with lowercase if empty.
+    if (data.images.length === 0 && data.videos.length === 0) {
+      const lower = folderName.toLowerCase();
+      if (lower !== folderName) data = await getFolderMedia(lower);
+    }
     return NextResponse.json(data);
   } catch (err) {
     console.error('Folder fetch error:', err);
