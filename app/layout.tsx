@@ -130,7 +130,7 @@ export default function RootLayout({
             bethlesser0@gmail.com
           </a>
           <p className="text-[#C8A200]/60 text-xs mt-2 tracking-wide">
-            Photographs &amp; Writings from Jamaica
+            Designed by Kojo Obeng-Arhin
           </p>
         </footer>
 

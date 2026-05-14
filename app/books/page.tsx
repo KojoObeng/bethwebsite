@@ -103,10 +103,8 @@ export default async function BooksPage() {
           className="text-[#7A6545] text-base max-w-xl leading-relaxed"
           style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
         >
-          A curated library of books on reggae, Jamaican culture, and the music
-          that shaped a generation.{' '}
-          <strong className="text-[#234D38]">Every book is free to read in full</strong>{' '}
-          — no account or purchase required. Just click to open.
+          Books by Beth Lesser available to read: King Jammys, The Legend of Sugar Minott and Rubadub Style.{" "}
+          <strong className="text-[#234D38]">No account or purchase required - just click to open.</strong>{" "} Dancehall is available commercially from the publisher, Soul Jazz Records.
         </p>
       </div>
 
