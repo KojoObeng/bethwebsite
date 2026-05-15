@@ -58,7 +58,7 @@ function Lightbox({ image, onClose, onPrev, onNext, hasPrev, hasNext, prevImage,
     >
       <div className="flex items-center justify-between px-6 py-3 flex-shrink-0 bg-black/40" onClick={(e) => e.stopPropagation()}>
 <span
-  className="text-[#C4A55A] text-lg truncate max-w-[60%]"
+  className="text-[#FFE066] text-lg truncate max-w-[60%]"
   style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
 >
   {image.public_id.split('/').pop()?.replace(/_/g, ' ') ?? ''}
