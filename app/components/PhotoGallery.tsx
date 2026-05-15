@@ -57,12 +57,12 @@ function Lightbox({ image, onClose, onPrev, onNext, hasPrev, hasNext, prevImage,
       onClick={onClose}
     >
       <div className="flex items-center justify-between px-6 py-3 flex-shrink-0 bg-black/40" onClick={(e) => e.stopPropagation()}>
-        <span
-          className="text-[#C4A55A] text-xs tracking-[0.2em] uppercase truncate max-w-[60%]"
-          style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
-        >
-          {image.public_id.split('/').pop()?.replace(/_/g, ' ') ?? ''}
-        </span>
+<span
+  className="text-[#C4A55A] text-lg truncate max-w-[60%]"
+  style={{ fontFamily: 'var(--font-garamond), Georgia, serif' }}
+>
+  {image.public_id.split('/').pop()?.replace(/_/g, ' ') ?? ''}
+</span>
         <button onClick={onClose} className="text-[#C4A55A] hover:text-white text-2xl leading-none transition-colors" aria-label="Close">
           &times;
         </button>
